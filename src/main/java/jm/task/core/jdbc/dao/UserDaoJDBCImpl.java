@@ -16,14 +16,12 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
     public void createUsersTable() {
 
         String sql = "CREATE TABLE IF NOT EXISTS `newdbkata`.`USERS` (\n" +
-                "  `ID` INT NOT NULL AUTO_INCREMENT,\n" +
-                "  `NAME` VARCHAR(200) NOT NULL,\n" +
-                "  `LASTNAME` VARCHAR(200) NOT NULL,\n" +
-                "  `AGE` INT NOT NULL,\n" +
-                "  PRIMARY KEY (`id`),\n" +
-                "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)\n" +
-                "ENGINE = InnoDB\n" +
-                "DEFAULT CHARACTER SET = utf8;";
+                "  `id` BIGINT NOT NULL AUTO_INCREMENT,\n" +
+                "  `name` VARCHAR(200) NULL,\n" +
+                "  `lastname` VARCHAR(200) NULL,\n" +
+                "  `age` INT NULL,\n" +
+                "  PRIMARY KEY (`id`))\n" +
+                "ENGINE = MyISAM;";
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
