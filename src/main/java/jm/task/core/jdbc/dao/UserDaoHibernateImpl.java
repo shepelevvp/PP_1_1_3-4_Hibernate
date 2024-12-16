@@ -8,9 +8,9 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class UserDaoHibernateImpl extends Util implements UserDao {
+public class UserDaoHibernateImpl implements UserDao {
 
-    SessionFactory factory = getSessionFactory();
+    SessionFactory factory = Util.getSessionFactory();
 
     public UserDaoHibernateImpl() {
 

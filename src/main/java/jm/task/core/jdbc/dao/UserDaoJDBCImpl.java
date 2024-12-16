@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoJDBCImpl extends Util implements UserDao {
+public class UserDaoJDBCImpl implements UserDao {
 
     public UserDaoJDBCImpl() {
 
@@ -23,7 +23,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
                 "  PRIMARY KEY (`id`))\n" +
                 "ENGINE = MyISAM;";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = Util.getConnection();
              Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
@@ -35,7 +35,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
         String sql = "DROP TABLE IF EXISTS `newdbkata`.`USERS`;";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = Util.getConnection();
              Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
         String sql = "INSERT INTO USERS (NAME, LASTNAME, AGE) VALUES (?, ?, ?);";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = Util.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, lastName);
@@ -63,7 +63,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
         String removeUserById = "DELETE FROM USERS WHERE ID=?;";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = Util.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(removeUserById)) {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
@@ -79,7 +79,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
         String sql = "SELECT * FROM USERS";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = Util.getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql)) {
 
@@ -102,7 +102,7 @@ public class UserDaoJDBCImpl extends Util implements UserDao {
 
         String sql = "DELETE FROM USERS";
 
-        try (Connection connection = getConnection();
+        try (Connection connection = Util.getConnection();
                  Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
